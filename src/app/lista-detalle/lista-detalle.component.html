@@ -1,10 +1,27 @@
 <div class="container" *ngIf="lista">
-    <h2>{{ lista.nombre }}</h2>
-    <input [(ngModel)]="nuevoItem" placeholder="Nuevo ítem" />
-    <button (click)="agregarItem()">Añadir Ítem</button>
+  <h2>{{ lista.nombre }}</h2>
+  <input [(ngModel)]="nuevoItem" placeholder="Nuevo ítem" />
+  <button (click)="agregarItem()">Añadir Ítem</button>
 
-    <ul>
-        <li *ngFor="let item of lista.items">{{ item }}</li>
-    </ul>
-
+  <ul>
+    <li *ngFor="let item of lista.items">{{ item }}</li>
+  </ul>
 </div>
+
+considera utilizar los nuevos elementos de for y if (hay alguno mas) los *ngFor
+y ngif se van a quedar obsoletos
+<!-- @FIX  -->
+@if(lista){
+<div class="container">
+  <h2>{{ lista.nombre }}</h2>
+  <input [(ngModel)]="nuevoItem" placeholder="Nuevo ítem" />
+  <button (click)="agregarItem()">Añadir Ítem</button>
+  <ul>
+    @for(item of lista.items; track item){
+    <li>{{ item }}</li>
+    }
+  </ul>
+</div>
+} @else{
+<p>no hay lista</p>
+}

@@ -15,6 +15,9 @@ export class ListaDetalleComponent implements OnInit {
   lista: { id: number; nombre: string; items: string[] } | undefined;
   nuevoItem: string = '';
 
+  //@FIX la genete normalmente importa los servicios como si fueran una variable mas route: XXX a mi me gusta mas poner una _ delante del nombre para identifdicar rapido lo que es un sercicio y lo que no
+  // _listasService: ListasService o simplemente => _listas
+  // esto ya va a gustos, pero es mucho mas facil cuando escribes this._ te va a salir toda la lista de servicios, hay componentes grandes a veces
   constructor(
     private route: ActivatedRoute,
     private listasService: ListasService

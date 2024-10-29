@@ -1,13 +1,23 @@
-
 <div class="container">
-    <h1>Mis Listas</h1>
-    <input [(ngModel)]="nuevaListaNombre" placeholder="Nueva lista" />
-    <button (click)="agregarLista()">Añadir Lista</button>
-
-    <ul>
-        <li *ngFor="let lista of listas" (click)="verLista(lista.id)">
-            {{ lista.nombre }}
-        </li>
-    </ul>
-    
+  <h1>Mis Listas</h1>
+  <input [(ngModel)]="nuevaListaNombre" placeholder="Nueva lista" />
+  <button (click)="agregarLista()">Añadir Lista</button>
+  <!-- @FIX -->
+  Correccion =>
+  <input [(ngModel)]="nuevaListaNombreCorreccion" placeholder="Nueva lista" />
+  <button
+    [disabled]="!this.nuevaListaNombreCorreccion"
+    (click)="agregarListaCorreccion()"
+  >
+    Añadir Lista
+  </button>
+  En este caso le decimos que nos habilite o deshabilite el boton, la propiedad
+  disabled se le puede pasar plana como disabled="true" o con las llaves
+  [disabled] en este caso espera codigo nativo, ya sea true o false o una
+  condicion por ejemplo le puedes pasar aqui el nuevaListaNombre.trim()
+  <ul>
+    <li *ngFor="let lista of listas" (click)="verLista(lista.id)">
+      {{ lista.nombre }}
+    </li>
+  </ul>
 </div>

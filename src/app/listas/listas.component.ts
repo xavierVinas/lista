@@ -13,7 +13,8 @@ import { CommonModule } from '@angular/common';
 })
 export class ListasComponent implements OnInit {
   listas: any[] = [];
-  nuevaListaNombre: string = '';
+  nuevaListaNombre: string = ''; //@FIX se puede iniciar una variable como null y no hace falta iniciarla con un ''
+  nuevaListaNombreCorreccion!: string; //@FIX se puede iniciar una variable como null y no hace falta iniciarla con un '' hay que pasarle el ! para indicarle que empieza como null
 
   constructor(private listasService: ListasService, private router: Router) {}
 
@@ -29,7 +30,13 @@ export class ListasComponent implements OnInit {
     if (this.nuevaListaNombre.trim()) {
       this.listasService.agregarLista(this.nuevaListaNombre);
       this.nuevaListaNombre = '';
-      this.listas = this.listasService.obtenerListas(); 
+      this.listas = this.listasService.obtenerListas();
     }
+  }
+
+  public agregarListaCorreccion(): void {
+    this.listasService.agregarLista(this.nuevaListaNombreCorreccion);
+    this.nuevaListaNombreCorreccion = '';
+    this.listas = this.listasService.obtenerListas();
   }
 }

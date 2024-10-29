@@ -5,8 +5,13 @@ import { Injectable } from '@angular/core';
   providedIn: 'root',
 })
 export class ListasService {
+  // @FIX no tipes en la misma linea, crea siempre un modelo con un interface => private listas: List[] = [...]
   private listas: { id: number; nombre: string; items: string[] }[] = [
-    { id: 1, nombre: 'Lista de Compras', items: ['Leche de mipalo', 'Panallets', 'Huevos'] },
+    {
+      id: 1,
+      nombre: 'Lista de Compras',
+      items: ['Leche de mipalo', 'Panallets', 'Huevos'],
+    },
     {
       id: 2,
       nombre: 'Lista de Tareas',
@@ -16,7 +21,18 @@ export class ListasService {
 
   constructor() {}
 
+  //@FIX typa siempre los metodos ya sean publicos o privados y typa siempre lo que devuelve si no devuelve nada tambien se tipa con un void => public metodo(): void {}
+
   obtenerListas() {
+    return this.listas;
+  }
+
+  public obtenerListasCorreccion(): {
+    // @FIX habría que tipar con un interface
+    id: number;
+    nombre: string;
+    items: string[];
+  }[] {
     return this.listas;
   }
 

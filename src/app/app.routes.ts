@@ -1,7 +1,7 @@
 import { Routes } from '@angular/router';
 import { ListasComponent } from './listas/listas.component';
+import { LoginComponent } from './login/login.component';
 import { ListaDetalleComponent } from './lista-detalle/lista-detalle.component';
-import { LoginComponent } from './login/login.component'; 
 
 export const routes: Routes = [
   { path: '', redirectTo: '/login', pathMatch: 'full' }, // Redirige a la pantalla de login
