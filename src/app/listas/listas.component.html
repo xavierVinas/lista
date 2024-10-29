@@ -1,0 +1,13 @@
+
+<div class="container">
+    <h1>Mis Listas</h1>
+    <input [(ngModel)]="nuevaListaNombre" placeholder="Nueva lista" />
+    <button (click)="agregarLista()">Añadir Lista</button>
+
+    <ul>
+        <li *ngFor="let lista of listas" (click)="verLista(lista.id)">
+            {{ lista.nombre }}
+        </li>
+    </ul>
+    
+</div>

@@ -1,0 +1,42 @@
+<div class="container">
+    <h1>Lista de Tareas</h1>
+
+    <div class="input-container">
+        <input [(ngModel)]="item" placeholder="Añadir nuevo ítem" class="p-inputtext p-component" />
+        <button (click)="agregarItem()" class="p-button p-component p-button-success">
+            <i class="pi pi-plus"></i> Añadir
+        </button>
+        <button (click)="items = []" class="p-button p-component p-button-danger">
+            <i class="pi pi-times"></i> Limpiar
+        </button>
+    </div>
+
+    <p-table 
+        [value]="items" 
+        [paginator]="true" 
+        [rows]="10" 
+        class="p-datatable-striped p-datatable-sm">
+        
+        <ng-template pTemplate="header">
+            <tr>
+                <th pSortableColumn="item">Ítem <p-sortIcon field="item"></p-sortIcon></th>
+                <th>Acciones</th>
+            </tr>
+        </ng-template>
+
+        <ng-template pTemplate="body" let-item let-i="rowIndex">
+            <tr>
+                <td>{{ item }}</td>
+                <td>
+                    <button (click)="eliminarItem(i)" class="p-button p-component p-button-danger">
+                        <i class="pi pi-trash"></i> Eliminar
+                    </button>
+                </td>
+            </tr>
+        </ng-template>
+
+        <ng-template pTemplate="footer">
+        
+        </ng-template>
+    </p-table>
+</div>
