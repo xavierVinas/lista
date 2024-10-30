@@ -13,8 +13,8 @@ import { CommonModule } from '@angular/common';
 })
 export class ListasComponent implements OnInit {
   listas: any[] = [];
-  nuevaListaNombre: string = ''; //@FIX se puede iniciar una variable como null y no hace falta iniciarla con un ''
-  nuevaListaNombreCorreccion!: string; //@FIX se puede iniciar una variable como null y no hace falta iniciarla con un '' hay que pasarle el ! para indicarle que empieza como null
+  nuevaListaNombre: string | null = null;
+  nuevaListaNombreCorreccion: string | null = null; 
 
   constructor(private listasService: ListasService, private router: Router) {}
 
@@ -22,21 +22,23 @@ export class ListasComponent implements OnInit {
     this.listas = this.listasService.obtenerListas();
   }
 
-  verLista(id: number) {
+  verLista(id: number): void {
     this.router.navigate(['/lista', id]);
   }
 
-  agregarLista() {
-    if (this.nuevaListaNombre.trim()) {
+  agregarLista(): void {
+    if (this.nuevaListaNombre?.trim()) {
       this.listasService.agregarLista(this.nuevaListaNombre);
-      this.nuevaListaNombre = '';
+      this.nuevaListaNombre = null; 
       this.listas = this.listasService.obtenerListas();
     }
   }
 
-  public agregarListaCorreccion(): void {
-    this.listasService.agregarLista(this.nuevaListaNombreCorreccion);
-    this.nuevaListaNombreCorreccion = '';
-    this.listas = this.listasService.obtenerListas();
+  agregarListaCorreccion(): void {
+    if (this.nuevaListaNombreCorreccion?.trim()) {
+      this.listasService.agregarLista(this.nuevaListaNombreCorreccion);
+      this.nuevaListaNombreCorreccion = null; 
+      this.listas = this.listasService.obtenerListas();
+    }
   }
 }

@@ -15,22 +15,23 @@ export class ListaDetalleComponent implements OnInit {
   lista: { id: number; nombre: string; items: string[] } | undefined;
   nuevoItem: string = '';
 
-  //@FIX la genete normalmente importa los servicios como si fueran una variable mas route: XXX a mi me gusta mas poner una _ delante del nombre para identifdicar rapido lo que es un sercicio y lo que no
-  // _listasService: ListasService o simplemente => _listas
-  // esto ya va a gustos, pero es mucho mas facil cuando escribes this._ te va a salir toda la lista de servicios, hay componentes grandes a veces
   constructor(
-    private route: ActivatedRoute,
-    private listasService: ListasService
+    private _route: ActivatedRoute,
+    private _listasService: ListasService
   ) {}
 
   ngOnInit() {
-    const id = Number(this.route.snapshot.paramMap.get('id'));
-    this.lista = this.listasService.obtenerLista(id);
+    const id = Number(this._route.snapshot.paramMap.get('id'));
+    if (!isNaN(id)) {
+      this.lista = this._listasService.obtenerLista(id);
+    } else {
+      console.warn('ID inválido para la lista');
+    }
   }
 
   agregarItem() {
     if (this.nuevoItem.trim() && this.lista) {
-      this.listasService.agregarItemALista(this.lista.id, this.nuevoItem);
+      this._listasService.agregarItemALista(this.lista.id, this.nuevoItem);
       this.nuevoItem = '';
     }
   }
