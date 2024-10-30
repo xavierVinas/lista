@@ -1,8 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Router } from '@angular/router';
 import { ListasService } from '../listas.service';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-listas',
@@ -11,15 +12,20 @@ import { CommonModule } from '@angular/common';
   templateUrl: './listas.component.html',
   styleUrls: ['./listas.component.css'],
 })
-export class ListasComponent implements OnInit {
+export class ListasComponent implements OnInit, OnDestroy {
   listas: any[] = [];
   nuevaListaNombre: string | null = null;
-  nuevaListaNombreCorreccion: string | null = null; 
+  nuevaListaNombreCorreccion: string | null = null;
+  private listasSubscription: Subscription = new Subscription();
 
   constructor(private listasService: ListasService, private router: Router) {}
 
   ngOnInit(): void {
-    this.listas = this.listasService.obtenerListas();
+    this.listasSubscription = this.listasService
+      .obtenerListas()
+      .subscribe((listas) => {
+        this.listas = listas;
+      });
   }
 
   verLista(id: number): void {
@@ -29,16 +35,18 @@ export class ListasComponent implements OnInit {
   agregarLista(): void {
     if (this.nuevaListaNombre?.trim()) {
       this.listasService.agregarLista(this.nuevaListaNombre);
-      this.nuevaListaNombre = null; 
-      this.listas = this.listasService.obtenerListas();
+      this.nuevaListaNombre = null;
     }
   }
 
   agregarListaCorreccion(): void {
     if (this.nuevaListaNombreCorreccion?.trim()) {
       this.listasService.agregarLista(this.nuevaListaNombreCorreccion);
-      this.nuevaListaNombreCorreccion = null; 
-      this.listas = this.listasService.obtenerListas();
+      this.nuevaListaNombreCorreccion = null;
     }
+  }
+
+  ngOnDestroy(): void {
+    this.listasSubscription.unsubscribe();
   }
 }

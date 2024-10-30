@@ -1,52 +1,43 @@
-// src/app/listas.service.ts
 import { Injectable } from '@angular/core';
+import { BehaviorSubject, Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
 })
 export class ListasService {
-  // @FIX no tipes en la misma linea, crea siempre un modelo con un interface => private listas: List[] = [...]
-  private listas: { id: number; nombre: string; items: string[] }[] = [
-    {
-      id: 1,
-      nombre: 'Lista de Compras',
-      items: ['Leche de mipalo', 'Panallets', 'Huevos'],
-    },
-    {
-      id: 2,
-      nombre: 'Lista de Tareas',
-      items: ['Limpiar nabo', 'Estudiar', 'Comprar'],
-    },
-  ];
+  private listasSubject: BehaviorSubject<any[]> = new BehaviorSubject<any[]>(
+    []
+  );
+  listas$: Observable<any[]> = this.listasSubject.asObservable();
 
-  constructor() {}
-
-  //@FIX typa siempre los metodos ya sean publicos o privados y typa siempre lo que devuelve si no devuelve nada tambien se tipa con un void => public metodo(): void {}
-
-  obtenerListas() {
-    return this.listas;
+  constructor() {
+    this.listasSubject.next([
+      { id: 1, nombre: 'Lista Compra', items: ['carne', 'pescado'] },
+      { id: 2, nombre: 'Lista Tareas', items: ['Barrer', 'Bailar'] },
+    ]);
   }
 
-  public obtenerListasCorreccion(): {
-    // @FIX habría que tipar con un interface
-    id: number;
-    nombre: string;
-    items: string[];
-  }[] {
-    return this.listas;
+  obtenerListas(): Observable<any[]> {
+    return this.listas$;
   }
 
-  obtenerLista(id: number) {
-    return this.listas.find((lista) => lista.id === id);
+  obtenerLista(id: number): any | undefined {
+    return this.listasSubject.value.find((lista) => lista.id === id);
   }
 
-  agregarLista(nombre: string) {
-    const nuevaLista = { id: this.listas.length + 1, nombre, items: [] };
-    this.listas.push(nuevaLista);
+  agregarLista(nombre: string): void {
+    const nuevaLista = { id: Date.now(), nombre, items: [] };
+    const listasActualizadas = [...this.listasSubject.value, nuevaLista];
+    this.listasSubject.next(listasActualizadas);
   }
 
-  agregarItemALista(id: number, item: string) {
-    const lista = this.obtenerLista(id);
-    lista?.items.push(item);
+  agregarItemALista(id: number, item: string): void {
+    const listasActualizadas = this.listasSubject.value.map((lista) => {
+      if (lista.id === id) {
+        return { ...lista, items: [...lista.items, item] };
+      }
+      return lista;
+    });
+    this.listasSubject.next(listasActualizadas);
   }
 }
