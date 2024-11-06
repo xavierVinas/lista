@@ -15,12 +15,12 @@ import { Subscription } from 'rxjs';
 export class ListasComponent implements OnInit, OnDestroy {
   listas: any[] = [];
   nuevaListaNombre: string | null = null;
-  nuevaListaNombreCorreccion: string | null = null;
   private listasSubscription: Subscription = new Subscription();
 
   constructor(private listasService: ListasService, private router: Router) {}
 
   ngOnInit(): void {
+   
     this.listasSubscription = this.listasService
       .obtenerListas()
       .subscribe((listas) => {
@@ -35,14 +35,7 @@ export class ListasComponent implements OnInit, OnDestroy {
   agregarLista(): void {
     if (this.nuevaListaNombre?.trim()) {
       this.listasService.agregarLista(this.nuevaListaNombre);
-      this.nuevaListaNombre = null;
-    }
-  }
-
-  agregarListaCorreccion(): void {
-    if (this.nuevaListaNombreCorreccion?.trim()) {
-      this.listasService.agregarLista(this.nuevaListaNombreCorreccion);
-      this.nuevaListaNombreCorreccion = null;
+      this.nuevaListaNombre = null; 
     }
   }
 

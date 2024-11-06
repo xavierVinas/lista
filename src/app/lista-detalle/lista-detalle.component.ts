@@ -10,7 +10,7 @@ import { Subscription } from 'rxjs';
   standalone: true,
   imports: [FormsModule, CommonModule],
   templateUrl: './lista-detalle.component.html',
-  styleUrl: './lista-detalle.component.css',
+  styleUrls: ['./lista-detalle.component.css'],
 })
 export class ListaDetalleComponent implements OnInit, OnDestroy {
   lista: { id: number; nombre: string; items: string[] } | undefined;
@@ -23,13 +23,16 @@ export class ListaDetalleComponent implements OnInit, OnDestroy {
   ) {}
 
   ngOnInit() {
-    const id = Number(this.route.snapshot.paramMap.get('id'));
+    const idParam = this.route.snapshot.paramMap.get('id');
+    const id = idParam ? Number(idParam) : null;
 
-    this.listaSubscription = this.listasService
-      .obtenerListas()
-      .subscribe((listas) => {
-        this.lista = listas.find((lista) => lista.id === id);
-      });
+    if (id !== null) {
+      this.listaSubscription = this.listasService
+        .obtenerListas()
+        .subscribe((listas) => {
+          this.lista = listas.find((lista) => lista.id === id);
+        });
+    }
   }
 
   agregarItem() {
@@ -40,6 +43,7 @@ export class ListaDetalleComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    this.listaSubscription.unsubscribe(); 
+    this.listaSubscription.unsubscribe();
   }
 }
+
