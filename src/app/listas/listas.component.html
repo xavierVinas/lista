@@ -1,9 +1,8 @@
-<div class="container">
+<div class="lists-container">
   <h1>Mis Listas</h1>
+
   <input [(ngModel)]="nuevaListaNombre" placeholder="Nueva lista" />
-  <button [disabled]="!nuevaListaNombre?.trim()"
-    (click)="agregarLista()"
-    >
+  <button [disabled]="!nuevaListaNombre?.trim()" (click)="agregarLista()">
     Añadir Lista
   </button>
 
@@ -13,3 +12,4 @@
     </li>
   </ul>
 </div>
+
