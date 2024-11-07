@@ -13,7 +13,7 @@ import { Router } from '@angular/router';
   standalone: true,
   imports: [ReactiveFormsModule, CommonModule],
   templateUrl: './register.component.html',
-  styleUrls: ['./register.component.css'],
+  styleUrls: ['./register.component.scss'],
 })
 export class RegisterComponent {
   registerForm: FormGroup;

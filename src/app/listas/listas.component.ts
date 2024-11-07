@@ -10,7 +10,7 @@ import { Subscription } from 'rxjs';
   standalone: true,
   imports: [FormsModule, CommonModule],
   templateUrl: './listas.component.html',
-  styleUrls: ['./listas.component.css'],
+  styleUrls: ['./listas.component.scss'],
 })
 export class ListasComponent implements OnInit, OnDestroy {
   listas: any[] = [];

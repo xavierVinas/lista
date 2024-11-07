@@ -6,7 +6,7 @@ import { TableModule } from 'primeng/table';
 @Component({
   selector: 'app-lista',
   templateUrl: './lista.component.html',
-  styleUrls: ['./lista.component.css'],
+  styleUrls: ['./lista.component.scss'],
   standalone: true,
   imports: [FormsModule, CommonModule, TableModule],
 })

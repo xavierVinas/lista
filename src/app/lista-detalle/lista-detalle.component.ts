@@ -10,7 +10,7 @@ import { Subscription } from 'rxjs';
   standalone: true,
   imports: [FormsModule, CommonModule],
   templateUrl: './lista-detalle.component.html',
-  styleUrls: ['./lista-detalle.component.css'],
+  styleUrls: ['./lista-detalle.component.scss'],
 })
 export class ListaDetalleComponent implements OnInit, OnDestroy {
   lista: { id: number; nombre: string; items: string[] } | undefined;
