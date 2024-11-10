@@ -1,15 +1,9 @@
-@if(lista){
-  
 <div class="container">
-  <h2>{{ lista.nombre }}</h2>
+  <h2>{{ lista?.nombre }}</h2>
   <input [(ngModel)]="nuevoItem" placeholder="Nuevo ítem" />
   <button (click)="agregarItem()">Añadir Ítem</button>
   <ul>
-    @for(item of lista.items; track item){
-    <li>{{ item }}</li>
-    }
+    <li *ngFor="let item of lista?.items">{{ item }}</li>
   </ul>
+  <button (click)="volverAListas()">Volver a Listas</button> 
 </div>
-} @else{
-<p>no hay lista</p>
-}

@@ -20,6 +20,7 @@ export class AuthService {
     const storedPassword = localStorage.getItem('password');
 
     if (username === storedUsername && password === storedPassword) {
+      localStorage.setItem('username', username);
       this.isAuthenticatedSubject.next(true);
       return true;
     }
@@ -31,4 +32,9 @@ export class AuthService {
     localStorage.removeItem('username');
     localStorage.removeItem('password');
   }
+
+  getUsername(): string | null {
+    return localStorage.getItem('username');
+  }
 }
+

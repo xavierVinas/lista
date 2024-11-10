@@ -13,6 +13,8 @@ export const routes: Routes = [
     path: 'lista/:id',
     component: ListaDetalleComponent,
     canActivate: [AuthGuard],
-  }, 
+  },
   { path: '', redirectTo: '/login', pathMatch: 'full' },
+  
 ];
+

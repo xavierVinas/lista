@@ -1,4 +1,9 @@
 <div class="lists-container">
+  <header class="header">
+    <span class="username">Hola, {{ username }}</span>
+    <button class="logout-button" (click)="logout()">Cerrar sesión</button>
+  </header>
+
   <h1>Mis Listas</h1>
 
   <input [(ngModel)]="nuevaListaNombre" placeholder="Nueva lista" />

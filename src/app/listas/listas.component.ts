@@ -1,6 +1,7 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Router } from '@angular/router';
 import { ListasService } from '../listas.service';
+import { AuthService } from '../auth.service';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { Subscription } from 'rxjs';
@@ -15,12 +16,18 @@ import { Subscription } from 'rxjs';
 export class ListasComponent implements OnInit, OnDestroy {
   listas: any[] = [];
   nuevaListaNombre: string | null = null;
+  username: string | null = null;
   private listasSubscription: Subscription = new Subscription();
 
-  constructor(private listasService: ListasService, private router: Router) {}
+  constructor(
+    private listasService: ListasService,
+    private router: Router,
+    private authService: AuthService 
+  ) {}
 
   ngOnInit(): void {
-   
+    this.username = localStorage.getItem('username') ?? 'Usuario';
+
     this.listasSubscription = this.listasService
       .obtenerListas()
       .subscribe((listas) => {
@@ -35,8 +42,13 @@ export class ListasComponent implements OnInit, OnDestroy {
   agregarLista(): void {
     if (this.nuevaListaNombre?.trim()) {
       this.listasService.agregarLista(this.nuevaListaNombre);
-      this.nuevaListaNombre = null; 
+      this.nuevaListaNombre = null;
     }
+  }
+
+  logout(): void {
+    this.authService.logout(); 
+    this.router.navigate(['/login']);
   }
 
   ngOnDestroy(): void {

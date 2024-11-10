@@ -1,49 +1,42 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 import { ActivatedRoute } from '@angular/router';
 import { ListasService } from '../listas.service';
-import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
-import { Subscription } from 'rxjs';
+import { FormsModule } from '@angular/forms'; 
 
 @Component({
   selector: 'app-lista-detalle',
-  standalone: true,
-  imports: [FormsModule, CommonModule],
+  standalone: true, 
+  imports: [CommonModule, FormsModule], 
   templateUrl: './lista-detalle.component.html',
   styleUrls: ['./lista-detalle.component.scss'],
 })
-export class ListaDetalleComponent implements OnInit, OnDestroy {
+export class ListaDetalleComponent {
   lista: { id: number; nombre: string; items: string[] } | undefined;
   nuevoItem: string = '';
-  private listaSubscription: Subscription = new Subscription();
 
   constructor(
     private route: ActivatedRoute,
-    private listasService: ListasService
+    private listasService: ListasService,
+    private router: Router
   ) {}
 
   ngOnInit() {
-    const idParam = this.route.snapshot.paramMap.get('id');
-    const id = idParam ? Number(idParam) : null;
-
-    if (id !== null) {
-      this.listaSubscription = this.listasService
-        .obtenerListas()
-        .subscribe((listas) => {
-          this.lista = listas.find((lista) => lista.id === id);
-        });
-    }
+    const id = Number(this.route.snapshot.paramMap.get('id'));
+    this.listasService.obtenerListas().subscribe((listas) => {
+      this.lista = listas.find((lista) => lista.id === id);
+    });
   }
 
   agregarItem() {
     if (this.nuevoItem.trim() && this.lista) {
       this.listasService.agregarItemALista(this.lista.id, this.nuevoItem);
-      this.nuevoItem = '';
+      this.nuevoItem = ''; 
     }
   }
 
-  ngOnDestroy(): void {
-    this.listaSubscription.unsubscribe();
+  volverAListas() {
+    this.router.navigate(['/listas']); 
   }
 }
-

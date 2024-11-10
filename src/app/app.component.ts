@@ -4,7 +4,6 @@ import { ListaComponent } from './lista/lista.component';
 import { TableModule } from 'primeng/table';
 import { FormsModule } from '@angular/forms';
 import { LoginComponent } from './login/login.component';
-
 import { ListasComponent } from './listas/listas.component';
 import { ListaDetalleComponent } from './lista-detalle/lista-detalle.component';
 
