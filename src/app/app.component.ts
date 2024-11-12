@@ -6,6 +6,7 @@ import { FormsModule } from '@angular/forms';
 import { LoginComponent } from './login/login.component';
 import { ListasComponent } from './listas/listas.component';
 import { ListaDetalleComponent } from './lista-detalle/lista-detalle.component';
+import { HeaderComponent } from './header/header.component';
 
 @Component({
   selector: 'app-root',
@@ -18,6 +19,7 @@ import { ListaDetalleComponent } from './lista-detalle/lista-detalle.component';
     LoginComponent,
     ListaDetalleComponent,
     ListasComponent,
+    HeaderComponent,
   ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss',

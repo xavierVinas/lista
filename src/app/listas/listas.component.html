@@ -1,17 +1,14 @@
-<div class="lists-container">
-  <header class="header">
-    <span class="username">Hola, {{ username }}</span>
-    <button class="logout-button" (click)="logout()">Cerrar sesión</button>
-  </header>
+<app-header></app-header> 
+<div class="listas-container">
+  <h2>Mis Listas</h2>
 
-  <h1>Mis Listas</h1>
+  <input [(ngModel)]="nuevaListaNombre" class="input-field" placeholder="Nueva lista" />
 
-  <input [(ngModel)]="nuevaListaNombre" placeholder="Nueva lista" />
-  <button [disabled]="!nuevaListaNombre?.trim()" (click)="agregarLista()">
+  <button class="primary-button" [disabled]="!nuevaListaNombre?.trim()" (click)="agregarLista()">
     Añadir Lista
   </button>
 
-  <ul>
+  <ul class="items-list">
     <li *ngFor="let lista of listas" (click)="verLista(lista.id)">
       {{ lista.nombre }}
     </li>

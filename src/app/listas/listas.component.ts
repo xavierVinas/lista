@@ -1,3 +1,4 @@
+
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Router } from '@angular/router';
 import { ListasService } from '../listas.service';
@@ -5,11 +6,12 @@ import { AuthService } from '../auth.service';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { Subscription } from 'rxjs';
+import { HeaderComponent } from '../header/header.component';
 
 @Component({
   selector: 'app-listas',
   standalone: true,
-  imports: [FormsModule, CommonModule],
+  imports: [FormsModule, CommonModule, HeaderComponent],
   templateUrl: './listas.component.html',
   styleUrls: ['./listas.component.scss'],
 })
@@ -22,12 +24,11 @@ export class ListasComponent implements OnInit, OnDestroy {
   constructor(
     private listasService: ListasService,
     private router: Router,
-    private authService: AuthService 
+    private authService: AuthService
   ) {}
 
   ngOnInit(): void {
     this.username = localStorage.getItem('username') ?? 'Usuario';
-
     this.listasSubscription = this.listasService
       .obtenerListas()
       .subscribe((listas) => {
@@ -47,7 +48,7 @@ export class ListasComponent implements OnInit, OnDestroy {
   }
 
   logout(): void {
-    this.authService.logout(); 
+    this.authService.logout();
     this.router.navigate(['/login']);
   }
 

@@ -1,9 +1,16 @@
-<div class="container">
+<app-header [username]="username" (logout)="onLogout()"></app-header>
+
+<div class="listas-container">
   <h2>{{ lista?.nombre }}</h2>
-  <input [(ngModel)]="nuevoItem" placeholder="Nuevo ítem" />
-  <button (click)="agregarItem()">Añadir Ítem</button>
-  <ul>
-    <li *ngFor="let item of lista?.items">{{ item }}</li>
+
+  <input [(ngModel)]="nuevoItem" class="input-field" placeholder="Nuevo ítem" />
+  <button class="primary-button" (click)="agregarItem()">Añadir Ítem</button>
+
+  <ul class="items-list">
+    <li *ngFor="let item of lista?.items">
+      {{ item }}
+    </li>
   </ul>
-  <button (click)="volverAListas()">Volver a Listas</button> 
+
+  <button class="primary-button" (click)="volverAListas()">Volver a Listas</button>
 </div>
