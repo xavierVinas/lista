@@ -1,4 +1,4 @@
-<app-header [username]="username" (logout)="onLogout()"></app-header>
+<!-- <app-header [username]="username" (logout)="onLogout()"></app-header>
 
 <div class="listas-container">
   <h2>{{ lista?.nombre }}</h2>
@@ -9,6 +9,23 @@
   <ul class="items-list">
     <li *ngFor="let item of lista?.items">
       {{ item }}
+    </li>
+  </ul>
+
+  <button class="primary-button" (click)="volverAListas()">Volver a Listas</button>
+</div> -->
+<app-header [username]="username" (logout)="onLogout()"></app-header>
+
+<div class="listas-container">
+  <h2>{{ lista?.nombre }}</h2>
+
+  <input [(ngModel)]="nuevoItem" class="input-field" placeholder="Nuevo ítem" />
+  <button class="primary-button" (click)="agregarItem()">Añadir Ítem</button>
+
+  <ul class="items-list">
+    <li *ngFor="let item of lista?.items" class="item-lista">
+      <span [class.tachado]="item.completado">{{ item.texto }}</span>
+      <input type="checkbox" class="checkmark" [(ngModel)]="item.completado" (change)="toggleCompletarItem(item)" />
     </li>
   </ul>
 
