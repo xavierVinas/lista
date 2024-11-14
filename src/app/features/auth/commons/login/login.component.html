@@ -1,0 +1,22 @@
+<div class="login-container">
+    <form [formGroup]="loginForm" (ngSubmit)="login()" class="login-form">
+        <h2>Iniciar sesión</h2>
+        <div>
+            <label for="username">Correo electrónico</label>
+            <input id="username" formControlName="username" type="text" class="input-field"
+                placeholder="Correo electrónico" required />
+        </div>
+        <div>
+            <label for="password">Contraseña</label>
+            <input id="password" formControlName="password" type="password" class="input-field" placeholder="Contraseña"
+                required />
+        </div>
+        <button type="submit">Iniciar sesión</button>
+        <div class="forgot-link">
+            <p>¿No tienes cuenta? <button (click)="goToRegister()">Regístrate</button></p>
+        </div>
+    </form>
+
+   
+</div>
+

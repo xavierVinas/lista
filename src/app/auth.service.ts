@@ -5,9 +5,10 @@ import { BehaviorSubject } from 'rxjs';
   providedIn: 'root',
 })
 export class AuthService {
-  private isAuthenticatedSubject = new BehaviorSubject<boolean>(false);
+  private isAuthenticatedSubject = new BehaviorSubject<boolean>(false); // siempre se incia y tiene el ultimo valor emitido (cache)
   isAuthenticated$ = this.isAuthenticatedSubject.asObservable();
-
+  // subject no tiene ultimo valor simplemente te suscribes al cambio de una variable
+  //hacer un subject de user
   constructor() {
     const storedUser = localStorage.getItem('username');
     if (storedUser) {
@@ -15,7 +16,8 @@ export class AuthService {
     }
   }
 
-  login(username: string, password: string): boolean {
+  public login(username: string, password: string): boolean {
+    //peticion http => ok o no ok
     const storedUsername = localStorage.getItem('username');
     const storedPassword = localStorage.getItem('password');
 
@@ -27,7 +29,7 @@ export class AuthService {
     return false;
   }
 
-  logout() {
+  public logout() {
     this.isAuthenticatedSubject.next(false);
     localStorage.removeItem('username');
     localStorage.removeItem('password');
@@ -37,4 +39,3 @@ export class AuthService {
     return localStorage.getItem('username');
   }
 }
-

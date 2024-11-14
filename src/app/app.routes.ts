@@ -4,9 +4,11 @@ import { LoginComponent } from './login/login.component';
 import { ListasComponent } from './listas/listas.component';
 import { ListaDetalleComponent } from './lista-detalle/lista-detalle.component';
 import { AuthGuard } from './auth.guard';
+import { ListComponent } from './features/list/views/list/list.component';
 
 export const routes: Routes = [
   { path: 'register', component: RegisterComponent },
+  { path: 'list-test', component: ListComponent },
   { path: 'login', component: LoginComponent },
   { path: 'listas', component: ListasComponent, canActivate: [AuthGuard] },
   {
@@ -15,6 +17,4 @@ export const routes: Routes = [
     canActivate: [AuthGuard],
   },
   { path: '', redirectTo: '/login', pathMatch: 'full' },
-  
 ];
-
