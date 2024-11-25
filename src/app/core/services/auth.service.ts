@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { BehaviorSubject, Observable, throwError } from 'rxjs';
-import { catchError, tap } from 'rxjs/operators';
+import { catchError, map, tap } from 'rxjs/operators';
+import { User } from '../models/user/user.models';
 
 @Injectable({
   providedIn: 'root',
@@ -9,34 +10,32 @@ import { catchError, tap } from 'rxjs/operators';
 export class AuthService {
   private isAuthenticatedSubject = new BehaviorSubject<boolean>(false);
   isAuthenticated$ = this.isAuthenticatedSubject.asObservable();
-  private baseUrl = 'https://';
+  private baseUrl = 'http://49.13.20.148:3010/api';
 
-  constructor(private http: HttpClient) {
-    const storedUser = localStorage.getItem('username');
-    if (storedUser) {
-      this.isAuthenticatedSubject.next(true);
-    }
+  constructor(private _http: HttpClient) {
+    // const storedUser = localStorage.getItem('username');
+    // if (storedUser) {
+    //   this.isAuthenticatedSubject.next(true);
+    // }
   }
 
-  login(username: string, password: string): Observable<any> {
-    return this.http.post(`${this.baseUrl}/login`, { username, password }).pipe(
-      tap((response: any) => {
-        localStorage.setItem('username', username); 
-        this.isAuthenticatedSubject.next(true);
-      }),
-      catchError((error) => {
-        console.error('Error en login:', error);
-        return throwError(() => error);
-      })
-    );
+  login(username: string, password: string): any {
+    // return this.http.post(`${this.baseUrl}/login`, { username, password }).pipe(
+    //   tap((response: any) => {
+    //     localStorage.setItem('username', username);
+    //     this.isAuthenticatedSubject.next(true);
+    //   }),
+    //   catchError((error) => {
+    //     console.error('Error en login:', error);
+    //     return throwError(() => error);
+    //   })
+    // );
   }
-  
-  register(user: {
-    username: string;
-    password: string;
-    email: string;
-  }): Observable<any> {
-    return this.http.post(`${this.baseUrl}/register`, user).pipe(
+
+  public register(user: Partial<User>): Observable<any> {
+    console.log(this.baseUrl, user);
+
+    return this._http.post(`${this.baseUrl}/v1/auth/register`, user).pipe(
       tap(() => {
         console.log('Registro exitoso');
       }),
@@ -48,11 +47,11 @@ export class AuthService {
   }
 
   logout(): void {
-    this.isAuthenticatedSubject.next(false);
-    localStorage.removeItem('username');
+    // this.isAuthenticatedSubject.next(false);
+    // localStorage.removeItem('username');
   }
 
-  getUsername(): string | null {
-    return localStorage.getItem('username');
+  getUsername(): any {
+    // return localStorage.getItem('username');
   }
 }

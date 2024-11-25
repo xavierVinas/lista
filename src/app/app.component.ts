@@ -8,21 +8,10 @@ import { ListaDetalleComponent } from './lista-detalle/lista-detalle.component';
 import { HeaderComponent } from './header/header.component';
 import { AuthComponent } from './auth/auth.component';
 
-
-
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [
-    RouterOutlet,
-    TableModule,
-    FormsModule,
-    LoginComponent,
-    ListaDetalleComponent,
-    ListasComponent,
-    HeaderComponent,
-    AuthComponent,
-  ],
+  imports: [RouterOutlet, TableModule, FormsModule, HeaderComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss',
 })

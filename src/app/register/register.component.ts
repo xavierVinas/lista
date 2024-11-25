@@ -4,9 +4,12 @@ import {
   FormGroup,
   Validators,
   ReactiveFormsModule,
+  FormControl,
 } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
+import { User } from '../core/models/user/user.models';
+import { AuthService } from '../core/services/auth.service';
 
 @Component({
   selector: 'app-register',
@@ -18,20 +21,27 @@ import { Router } from '@angular/router';
 export class RegisterComponent {
   registerForm: FormGroup;
 
-  constructor(private fb: FormBuilder, private router: Router) {
+  constructor(
+    private fb: FormBuilder,
+    private router: Router,
+    private _auth: AuthService
+  ) {
     this.registerForm = this.fb.group({
-      username: ['', Validators.required],
-      password: ['', Validators.required],
+      name: new FormControl<string>('', [Validators.required]),
+      surname: new FormControl<string>('', [Validators.required]),
+      email: new FormControl<string>('', [
+        Validators.required,
+        Validators.email,
+      ]),
+      password: new FormControl<string>('', [Validators.required]),
     });
   }
 
   register() {
-    const { username, password } = this.registerForm.value;
-    if (this.registerForm.valid) {
-      localStorage.setItem('username', username);
-      localStorage.setItem('password', password);
+    const user = this.registerForm.value;
 
-      this.router.navigate(['/login']);
-    }
+    this._auth
+      .register(user)
+      .subscribe((data) => console.log(' 2 la respuesta del server =>', data)); //redireccionar al login
   }
 }
