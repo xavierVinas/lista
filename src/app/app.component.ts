@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
-import { ListaComponent } from './lista/lista.component';
 import { TableModule } from 'primeng/table';
 import { FormsModule } from '@angular/forms';
 import { LoginComponent } from './login/login.component';
@@ -13,7 +12,6 @@ import { HeaderComponent } from './header/header.component';
   standalone: true,
   imports: [
     RouterOutlet,
-    ListaComponent,
     TableModule,
     FormsModule,
     LoginComponent,

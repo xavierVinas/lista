@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { ActivatedRoute } from '@angular/router';
-import { ListasService } from '../listas.service';
+import { ListasService } from '../core/services/listas.service';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { HeaderComponent } from '../header/header.component';
@@ -42,7 +42,7 @@ export class ListaDetalleComponent implements OnInit {
     if (this.nuevoItem.trim() && this.lista) {
       const nuevoElemento = { texto: this.nuevoItem, completado: false };
       this.lista.items.push(nuevoElemento);
-      this.nuevoItem = ''; 
+      this.nuevoItem = '';
     }
   }
 
@@ -54,8 +54,5 @@ export class ListaDetalleComponent implements OnInit {
     this.router.navigate(['/listas']);
   }
 
-  onLogout() {
-
-  }
+  onLogout() {}
 }
-

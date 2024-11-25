@@ -1,8 +1,7 @@
-
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Router } from '@angular/router';
-import { ListasService } from '../listas.service';
-import { AuthService } from '../auth.service';
+import { ListasService } from '../core/services/listas.service';
+import { AuthService } from '../core/services/auth.service';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { Subscription } from 'rxjs';

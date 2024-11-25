@@ -3,7 +3,7 @@ import { RegisterComponent } from './register/register.component';
 import { LoginComponent } from './login/login.component';
 import { ListasComponent } from './listas/listas.component';
 import { ListaDetalleComponent } from './lista-detalle/lista-detalle.component';
-import { AuthGuard } from './auth.guard';
+import { AuthGuard } from './core/guards/auth.guard';
 import { ListComponent } from './features/list/views/list/list.component';
 
 export const routes: Routes = [
