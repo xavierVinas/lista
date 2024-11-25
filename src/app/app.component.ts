@@ -6,6 +6,9 @@ import { LoginComponent } from './login/login.component';
 import { ListasComponent } from './listas/listas.component';
 import { ListaDetalleComponent } from './lista-detalle/lista-detalle.component';
 import { HeaderComponent } from './header/header.component';
+import { AuthComponent } from './auth/auth.component';
+
+
 
 @Component({
   selector: 'app-root',
@@ -18,6 +21,7 @@ import { HeaderComponent } from './header/header.component';
     ListaDetalleComponent,
     ListasComponent,
     HeaderComponent,
+    AuthComponent,
   ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss',
