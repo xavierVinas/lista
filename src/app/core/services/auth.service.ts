@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { BehaviorSubject, Observable, throwError } from 'rxjs';
-import { catchError, map, tap } from 'rxjs/operators';
+import { catchError, tap } from 'rxjs/operators';
 import { User } from '../models/user/user.models';
 
 @Injectable({
@@ -19,17 +19,18 @@ export class AuthService {
     // }
   }
 
-  login(username: string, password: string): any {
-    // return this.http.post(`${this.baseUrl}/login`, { username, password }).pipe(
-    //   tap((response: any) => {
-    //     localStorage.setItem('username', username);
-    //     this.isAuthenticatedSubject.next(true);
-    //   }),
-    //   catchError((error) => {
-    //     console.error('Error en login:', error);
-    //     return throwError(() => error);
-    //   })
-    // );
+  login(username: string, password: string): Observable<any> {
+    return this._http
+      .post(`${this.baseUrl}/v1/auth/login`, { username, password })
+      .pipe(
+        tap((response: any) => {
+          console.log('Login exitoso:', response);
+        }),
+        catchError((error) => {
+          console.error('Error en login:', error);
+          return throwError(() => error);
+        })
+      );
   }
 
   public register(user: Partial<User>): Observable<any> {

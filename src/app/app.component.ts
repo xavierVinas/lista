@@ -2,11 +2,7 @@ import { Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { TableModule } from 'primeng/table';
 import { FormsModule } from '@angular/forms';
-import { LoginComponent } from './login/login.component';
-import { ListasComponent } from './listas/listas.component';
-import { ListaDetalleComponent } from './lista-detalle/lista-detalle.component';
 import { HeaderComponent } from './header/header.component';
-import { AuthComponent } from './auth/auth.component';
 
 @Component({
   selector: 'app-root',

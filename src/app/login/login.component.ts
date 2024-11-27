@@ -4,10 +4,11 @@ import {
   FormGroup,
   Validators,
   ReactiveFormsModule,
+  FormControl,
 } from '@angular/forms';
-import { Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
-import { UserStorage } from '../core/models/enums/user.enum';
+import { Router } from '@angular/router';
+import { AuthService } from '../core/services/auth.service';
 
 @Component({
   selector: 'app-login',
@@ -19,27 +20,34 @@ import { UserStorage } from '../core/models/enums/user.enum';
 export class LoginComponent {
   loginForm: FormGroup;
 
-  constructor(private fb: FormBuilder, private router: Router) {
+  constructor(
+    private fb: FormBuilder,
+    private router: Router,
+    private _auth: AuthService
+  ) {
     this.loginForm = this.fb.group({
-      username: ['', [Validators.required]],
-      password: ['', [Validators.required]],
+      username: new FormControl<string>('', [Validators.required]),
+      password: new FormControl<string>('', [Validators.required]),
     });
   }
 
   login() {
-    // trasladar la logica al servicio
     const { username, password } = this.loginForm.value;
-    const storedUsername = localStorage.getItem(UserStorage.USERNAME);
-    const storedPassword = localStorage.getItem('password');
 
-    if (
-      this.loginForm.valid &&
-      username === storedUsername &&
-      password === storedPassword
-    ) {
-      this.router.navigate(['/listas']);
+    if (this.loginForm.valid) {
+      this._auth.login(username, password).subscribe(
+        (data) => {
+          console.log(data);
+          localStorage.setItem('authToken', data.token);
+          this.router.navigate(['/listas']);
+        },
+        (error) => {
+          console.error('Error al iniciar sesión:', error);
+          alert('Usuario o contraseña incorrectos.');
+        }
+      );
     } else {
-      alert('Credenciales incorrectas');
+      alert('competa todos los campos.');
     }
   }
 
