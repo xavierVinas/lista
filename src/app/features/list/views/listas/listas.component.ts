@@ -1,11 +1,11 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Router } from '@angular/router';
-import { ListasService } from '../core/services/listas.service';
-import { AuthService } from '../core/services/auth.service';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { Subscription } from 'rxjs';
-import { HeaderComponent } from '../header/header.component';
+import { HeaderComponent } from '../../../../core/layout/header/header.component';
+import { ListasService } from '../../../../core/services/listas.service';
+import { AuthService } from '../../../../core/services/auth.service';
 
 @Component({
   selector: 'app-listas',

@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { ActivatedRoute } from '@angular/router';
-import { ListasService } from '../core/services/listas.service';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { HeaderComponent } from '../header/header.component';
+import { HeaderComponent } from '../../../../core/layout/header/header.component';
+import { ListasService } from '../../../../core/services/listas.service';
 
 @Component({
   selector: 'app-lista-detalle',
