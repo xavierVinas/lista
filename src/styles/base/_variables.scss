@@ -1,0 +1,54 @@
+@import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@500&display=swap');
+
+$blue: #096fef;
+$dark-blue: #005274;
+$light-blue: #dbf5fb;
+$cyan: #99befb;
+$cyan2: #abeeff;
+$white: #ffffff;
+$red: #ff5757;
+$yellow: rgb(255, 251, 2);
+$light-yellow: rgb(252, 250, 125);
+$grey: #acaeb1;
+$light-grey: #d9d9d9;
+$dark-grey: #6c757d;
+$black: #000000;
+$primary-color: $blue;
+$secondary-color: $light-blue;
+$error-color: $red;
+$success: rgb(107, 221, 107);
+$body-background: #fff;
+$table-title: rgba(0, 0, 0, 0.54);
+
+$green: rgb(36, 201, 36);
+$light-green: rgb(7, 248, 7);
+
+$red: rgb(189, 38, 38);
+$light-red: rgb(243, 102, 102);
+
+$warning: #ffe400;
+
+$primary-font: 'Quicksand', Verdana, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+$secondary-font: 'Quicksand', Arial, Roboto, 'Segoe UI', 'Helvetica Neue', sans-serif;
+
+$container-column-gap: 30px;
+
+$breakpoints: (
+  'small': 1024px,
+  'medium': 1366px,
+  'large': 1600px,
+  'xlarge': 1920px,
+) !default;
+
+$container-columns: (
+  'small': 3,
+  'medium': 3,
+  'large': 4,
+  'xlarge': 4,
+) !default;
+
+:root {
+  --primary-color: #{$primary-color};
+  --primary-font: $primary-font;
+  --bg-body: #{$body-background};
+}
