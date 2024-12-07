@@ -21,6 +21,6 @@ export class StorageService {
    * @param object Object to save
    */
   public getInLocalStorage<T>(key: string): T | null {
-    return (localStorage.getItem(key) as T) ?? null;
+    return (JSON.parse(localStorage.getItem(key)!) as T) ?? null;
   }
 }
