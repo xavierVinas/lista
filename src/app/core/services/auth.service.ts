@@ -1,8 +1,14 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { BehaviorSubject, Observable, throwError } from 'rxjs';
-import { catchError, tap } from 'rxjs/operators';
+import { catchError, map, tap } from 'rxjs/operators';
 import { User } from '../models/user/user.models';
+import { StorageService } from './storage.service';
+import { SessionData } from '../models/enums/storare.enum';
+interface LoginResponse {
+  user: User;
+  token: string;
+}
 
 @Injectable({
   providedIn: 'root',
@@ -12,13 +18,18 @@ export class AuthService {
   public isAuthenticated$ = this.isAuthenticatedSubject.asObservable();
   private baseUrl = 'http://49.13.20.148:3010/api';
 
-  constructor(private _http: HttpClient) {}
+  constructor(private _http: HttpClient, private _storage: StorageService) {}
 
-  public login(email: string, password: string): Observable<any> {
-    return this._http.post<Pick<User, 'email' | 'name'>>(
-      `${this.baseUrl}/v1/auth/login`,
-      { email, password }
-    );
+  /**
+   *
+   * @param email
+   * @param password
+   * @returns login succesfully
+   */
+  public login(email: string, password: string): Observable<void> {
+    return this._http
+      .post<LoginResponse>(`${this.baseUrl}/v1/auth/login`, { email, password })
+      .pipe(map((resp) => this.setUser(resp)));
   }
 
   public register(user: Partial<User>): Observable<any> {
@@ -38,5 +49,11 @@ export class AuthService {
   public logout(): void {
     // this.isAuthenticatedSubject.next(false);
     // localStorage.removeItem('username');
+  }
+
+  private setUser(login: LoginResponse): void {
+    this._storage.setInLocalStorage(SessionData.USER, login.user);
+    this._storage.setInLocalStorage(SessionData.TOKEN, login.token);
+    this.isAuthenticatedSubject.next(true);
   }
 }

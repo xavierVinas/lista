@@ -6,11 +6,21 @@ import { Injectable } from '@angular/core';
 export class StorageService {
   constructor() {}
 
-  public setInLocalStorage(key: string, object: string): void {
-    localStorage.setItem(key, object);
+  /**
+   *
+   * @param key Key for reference in stogage
+   * @param object Object to save
+   */
+  public setInLocalStorage(key: string, object: unknown): void {
+    localStorage.setItem(key, JSON.stringify(object));
   }
 
-  // crear el get y crear el delete
-
-  //crear los mismos metodos para el session storage ( mirar la diferencia )
+  /**
+   *
+   * @param key Key for reference in stogage
+   * @param object Object to save
+   */
+  public getInLocalStorage<T>(key: string): T | null {
+    return (localStorage.getItem(key) as T) ?? null;
+  }
 }

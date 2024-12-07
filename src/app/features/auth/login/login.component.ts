@@ -9,7 +9,6 @@ import {
 import { CommonModule } from '@angular/common';
 import { Router, RouterModule } from '@angular/router';
 import { AuthService } from '../../../core/services/auth.service';
-import { User } from '../../../core/models/user/user.models';
 import { InputTextModule } from 'primeng/inputtext';
 import { ButtonModule } from 'primeng/button';
 
@@ -31,7 +30,7 @@ export class LoginComponent {
 
   constructor(
     private fb: FormBuilder,
-    private router: Router,
+    private _router: Router,
     private _auth: AuthService
   ) {
     this.loginForm = this.fb.group({
@@ -45,9 +44,12 @@ export class LoginComponent {
 
   public login() {
     const { email, password } = this.loginForm.getRawValue();
-  }
 
-  goToRegister() {
-    this.router.navigate(['/register']);
+    this._auth.login(email, password).subscribe({
+      next: () => this._router.navigate(['/']),
+      error: (error) => {
+        console.log('error', error); // controlar el error poniendo un mensaje
+      },
+    });
   }
 }
