@@ -9,28 +9,16 @@ import { User } from '../models/user/user.models';
 })
 export class AuthService {
   private isAuthenticatedSubject = new BehaviorSubject<boolean>(false);
-  isAuthenticated$ = this.isAuthenticatedSubject.asObservable();
+  public isAuthenticated$ = this.isAuthenticatedSubject.asObservable();
   private baseUrl = 'http://49.13.20.148:3010/api';
 
-  constructor(private _http: HttpClient) {
-    // const storedUser = localStorage.getItem('username');
-    // if (storedUser) {
-    //   this.isAuthenticatedSubject.next(true);
-    // }
-  }
+  constructor(private _http: HttpClient) {}
 
-  login(username: string, password: string): Observable<any> {
-    return this._http
-      .post(`${this.baseUrl}/v1/auth/login`, { username, password })
-      .pipe(
-        tap((response: any) => {
-          console.log('Login exitoso:', response);
-        }),
-        catchError((error) => {
-          console.error('Error en login:', error);
-          return throwError(() => error);
-        })
-      );
+  public login(email: string, password: string): Observable<any> {
+    return this._http.post<Pick<User, 'email' | 'name'>>(
+      `${this.baseUrl}/v1/auth/login`,
+      { email, password }
+    );
   }
 
   public register(user: Partial<User>): Observable<any> {
@@ -47,12 +35,8 @@ export class AuthService {
     );
   }
 
-  logout(): void {
+  public logout(): void {
     // this.isAuthenticatedSubject.next(false);
     // localStorage.removeItem('username');
-  }
-
-  getUsername(): any {
-    // return localStorage.getItem('username');
   }
 }

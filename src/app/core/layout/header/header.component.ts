@@ -21,12 +21,9 @@ export class HeaderComponent implements OnInit {
   }
 
   getUser() {
-    this._auth.getUsername();
+    // this._auth.getUsername();
   }
   onLogout() {
-    4;
-    console.log('cierro session');
-
     this._auth.logout();
   }
 }
