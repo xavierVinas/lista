@@ -1,13 +1,14 @@
-import { Injectable } from '@angular/core';
+import { afterNextRender, afterRender, Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { BehaviorSubject, Observable, throwError } from 'rxjs';
 import { catchError, map, tap } from 'rxjs/operators';
 import { User } from '../models/user/user.models';
 import { StorageService } from './storage.service';
 import { SessionData } from '../models/enums/storare.enum';
+import { Router } from '@angular/router';
 interface LoginResponse {
   user: User;
-  token: string;
+  authorizationToken: string;
 }
 
 @Injectable({
@@ -18,7 +19,21 @@ export class AuthService {
   public isAuthenticated$ = this.isAuthenticatedSubject.asObservable();
   private baseUrl = 'http://49.13.20.148:3010/api';
 
-  constructor(private _http: HttpClient, private _storage: StorageService) {}
+  constructor(private _http: HttpClient, private _storage: StorageService) {
+    afterNextRender(() => {
+      this.getAuthenticationFromInit();
+    });
+  }
+
+  get user(): User {
+    return this._storage.getInLocalStorage(SessionData.USER) as User;
+  }
+
+  private getAuthenticationFromInit(): void {
+    this.isAuthenticatedSubject.next(
+      !!this._storage.getInLocalStorage(SessionData.TOKEN)
+    );
+  }
 
   /**
    *
@@ -47,13 +62,17 @@ export class AuthService {
   }
 
   public logout(): void {
-    // this.isAuthenticatedSubject.next(false);
-    // localStorage.removeItem('username');
+    this._storage.removeItemFromLocalStorage(SessionData.TOKEN);
+    this._storage.removeItemFromLocalStorage(SessionData.USER);
+    this.isAuthenticatedSubject.next(false);
   }
 
   private setUser(login: LoginResponse): void {
     this._storage.setInLocalStorage(SessionData.USER, login.user);
-    this._storage.setInLocalStorage(SessionData.TOKEN, login.token);
+    this._storage.setInLocalStorage(
+      SessionData.TOKEN,
+      login.authorizationToken
+    );
     this.isAuthenticatedSubject.next(true);
   }
 }

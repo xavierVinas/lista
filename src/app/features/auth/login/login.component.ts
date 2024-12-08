@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import {
   FormBuilder,
   FormGroup,
@@ -11,6 +11,8 @@ import { Router, RouterModule } from '@angular/router';
 import { AuthService } from '../../../core/services/auth.service';
 import { InputTextModule } from 'primeng/inputtext';
 import { ButtonModule } from 'primeng/button';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { takeUntil } from 'rxjs';
 
 @Component({
   selector: 'app-login',
@@ -25,7 +27,7 @@ import { ButtonModule } from 'primeng/button';
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss'],
 })
-export class LoginComponent {
+export class LoginComponent implements OnInit {
   loginForm: FormGroup;
 
   constructor(
@@ -39,6 +41,14 @@ export class LoginComponent {
         Validators.email,
       ]),
       password: new FormControl<string>('', [Validators.required]),
+    });
+  }
+
+  public ngOnInit(): void {
+    this._auth.isAuthenticated$.subscribe((isAuthenticated) => {
+      if (isAuthenticated) {
+        this._router.navigate(['/']);
+      }
     });
   }
 

@@ -23,4 +23,12 @@ export class StorageService {
   public getInLocalStorage<T>(key: string): T | null {
     return (JSON.parse(localStorage.getItem(key)!) as T) ?? null;
   }
+
+  /**
+   *
+   * @param key key for remove from local storage
+   */
+  public removeItemFromLocalStorage(key: string): void {
+    localStorage.removeItem(key);
+  }
 }

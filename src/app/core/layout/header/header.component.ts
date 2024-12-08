@@ -1,6 +1,9 @@
 import { Component, Input, Output, EventEmitter, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { AuthService } from '../../services/auth.service';
+import { Router } from '@angular/router';
+import { User } from '../../models/user/user.models';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-header',
@@ -10,20 +13,18 @@ import { AuthService } from '../../services/auth.service';
   imports: [CommonModule],
 })
 export class HeaderComponent implements OnInit {
-  // quitar los inpuits
-  @Input() username: string = ''; // traer username del servicio
-  @Output() logout: EventEmitter<void> = new EventEmitter<void>();
-  constructor(private _auth: AuthService) {}
+  public user!: User;
+  constructor(private _auth: AuthService, private _router: Router) {}
 
-  // declaracion de variablaes y suscripciones
-  ngOnInit() {
+  public ngOnInit(): void {
     this.getUser();
   }
 
-  getUser() {
-    // this._auth.getUsername();
+  public getUser(): void {
+    this.user = this._auth.user;
   }
-  onLogout() {
+  public onLogout(): void {
     this._auth.logout();
+    this._router.navigate(['/login']);
   }
 }
