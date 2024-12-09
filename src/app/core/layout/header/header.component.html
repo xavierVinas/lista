@@ -1,4 +1,11 @@
 <header class="header">
   <span class="username">Hola, {{ user.name }}</span>
-  <button class="logout-button" (click)="onLogout()">Cerrar sesión</button>
+  <p-button
+    (onClick)="op.toggle($event)"
+    icon="pi pi-share-alt"
+    label="Share"
+  />
+  <p-overlayPanel #op>
+    <div class="op__container"></div>
+  </p-overlayPanel>
 </header>

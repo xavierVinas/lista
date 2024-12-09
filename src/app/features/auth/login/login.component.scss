@@ -1,6 +1,5 @@
 :host {
   margin: 0;
-  background-color: #f4f4f4;
   height: 100vh;
   display: flex;
   justify-content: center;
@@ -23,7 +22,7 @@
     flex-direction: column;
     justify-content: space-around;
     gap: 1.5rem;
-    background-color: #ffffff;
+    background-color: var(--surface-a);
     padding: 30px 40px;
     border-radius: 8px;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);

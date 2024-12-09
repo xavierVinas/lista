@@ -1,4 +1,4 @@
-<div class="container">
+<div class="container p-card">
   <form [formGroup]="loginForm" (ngSubmit)="login()" class="container__form">
     <div class="form__title">
       <h2>Iniciar sesión</h2>
@@ -34,6 +34,7 @@
       </div>
       <div>
         <p-button
+          severity="primary"
           type="submit"
           [disabled]="loginForm.invalid"
           label="Iniciar sesión"

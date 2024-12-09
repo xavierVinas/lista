@@ -1,6 +1,6 @@
-@import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@500&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Quicksand:wght@500&display=swap");
 
-$blue: #096fef;
+$blue: #4285f4;
 $dark-blue: #005274;
 $light-blue: #dbf5fb;
 $cyan: #99befb;
@@ -28,23 +28,25 @@ $light-red: rgb(243, 102, 102);
 
 $warning: #ffe400;
 
-$primary-font: 'Quicksand', Verdana, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
-$secondary-font: 'Quicksand', Arial, Roboto, 'Segoe UI', 'Helvetica Neue', sans-serif;
+$primary-font: "Quicksand", Verdana, "Segoe UI", Roboto, "Helvetica Neue", Arial,
+  sans-serif;
+$secondary-font: "Quicksand", Arial, Roboto, "Segoe UI", "Helvetica Neue",
+  sans-serif;
 
 $container-column-gap: 30px;
 
 $breakpoints: (
-  'small': 1024px,
-  'medium': 1366px,
-  'large': 1600px,
-  'xlarge': 1920px,
+  "small": 1024px,
+  "medium": 1366px,
+  "large": 1600px,
+  "xlarge": 1920px,
 ) !default;
 
 $container-columns: (
-  'small': 3,
-  'medium': 3,
-  'large': 4,
-  'xlarge': 4,
+  "small": 3,
+  "medium": 3,
+  "large": 4,
+  "xlarge": 4,
 ) !default;
 
 :root {
