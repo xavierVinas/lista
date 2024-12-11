@@ -8,7 +8,7 @@
     </div>
 
     <div class="card-body">
-      <input
+      <!-- <input
         [(ngModel)]="nuevaListaNombre"
         class="input-field"
         placeholder="Nueva lista"
@@ -20,13 +20,10 @@
         (click)="agregarLista()"
       >
         Añadir Lista
-      </button>
-
-      <ul class="items-list">
-        <li *ngFor="let lista of listas" (click)="verLista(lista.id)">
-          {{ lista.nombre }}
-        </li>
-      </ul>
+      </button> -->
+      @for(list of lists; track list){
+      <app-list-card [name]="list.name"></app-list-card>
+      }
     </div>
   </div>
 </div>

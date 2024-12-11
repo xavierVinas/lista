@@ -5,18 +5,18 @@ import { CommonModule } from '@angular/common';
 import { Subscription } from 'rxjs';
 import { ListasService } from '../../../../core/services/listas.service';
 import { AuthService } from '../../../../core/services/auth.service';
+import { ListCardComponent } from '../../commons/components/list-card/list-card.component';
 
 @Component({
   selector: 'app-listas',
   standalone: true,
-  imports: [FormsModule, CommonModule],
+  imports: [FormsModule, CommonModule, ListCardComponent],
   templateUrl: './listas.component.html',
   styleUrls: ['./listas.component.scss'],
 })
 export class ListasComponent implements OnInit, OnDestroy {
-  listas: any[] = [];
+  lists: any[] = [];
   nuevaListaNombre: string | null = null;
-  username: string | null = null;
   private listasSubscription: Subscription = new Subscription();
 
   constructor(
@@ -26,11 +26,10 @@ export class ListasComponent implements OnInit, OnDestroy {
   ) {}
 
   ngOnInit(): void {
-    this.username = localStorage.getItem('username') ?? 'Usuario';
     this.listasSubscription = this.listasService
       .obtenerListas()
       .subscribe((listas) => {
-        this.listas = listas;
+        this.lists = listas;
       });
   }
 

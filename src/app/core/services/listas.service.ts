@@ -12,8 +12,8 @@ export class ListasService {
 
   constructor() {
     this.listasSubject.next([
-      { id: 1, nombre: 'Lista Compra', items: ['carne', 'pescado'] },
-      { id: 2, nombre: 'Lista Tareas', items: ['Barrer', 'Bailar'] },
+      { id: 1, name: 'Lista Compra', items: ['carne', 'pescado'] },
+      { id: 2, name: 'Lista Tareas', items: ['Barrer', 'Bailar'] },
     ]);
   }
 

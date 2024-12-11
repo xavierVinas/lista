@@ -1,36 +1,39 @@
 <header class="header">
-  <span class="username">Hola, {{ user.name }}</span>
-  <p-button
-    #options
-    (onClick)="op.toggle($event)"
-    icon="pi pi-cog"
-    [rounded]="true"
-    [outlined]="true"
-    size="large"
-    severity="secondary"
-  />
-  <p-overlayPanel #op [appendTo]="options">
-    <div class="op__container">
-      <div class="op__container__group">
-        <label for="theme">Tema:</label>
-        <p-dropdown
-          [style]="{ width: '100%' }"
-          id="theme"
-          [options]="(appThemes$ | async)!"
-          [ngModel]="(selectedTheme$ | async)!"
-          optionLabel="name"
-          placeholder="Select a City"
-          (onChange)="changeTheme($event.value)"
-        />
+  <div class="header__title">CheqMate</div>
+  <div class="header__options">
+    <!-- <span class="username">Hola, {{ user.name }}</span> -->
+    <p-button
+      #options
+      (onClick)="op.toggle($event)"
+      icon="pi pi-cog"
+      [rounded]="true"
+      [outlined]="true"
+      size="large"
+      severity="secondary"
+    />
+    <p-overlayPanel #op [appendTo]="options">
+      <div class="op__container">
+        <div class="op__container__group">
+          <label for="theme">Tema:</label>
+          <p-dropdown
+            [style]="{ width: '100%' }"
+            id="theme"
+            [options]="(appThemes$ | async)!"
+            [ngModel]="(selectedTheme$ | async)!"
+            optionLabel="name"
+            placeholder="Select a City"
+            (onChange)="changeTheme($event.value)"
+          />
+        </div>
+        <div class="op__container__footer">
+          <p-button
+            (click)="onLogout()"
+            severity="danger"
+            label="Cerrar sesión"
+            icon="pi pi-sign-out"
+          ></p-button>
+        </div>
       </div>
-      <div class="op__container__footer">
-        <p-button
-          (click)="onLogout()"
-          severity="danger"
-          label="Cerrar sesión"
-          icon="pi pi-sign-out"
-        ></p-button>
-      </div>
-    </div>
-  </p-overlayPanel>
+    </p-overlayPanel>
+  </div>
 </header>
