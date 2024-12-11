@@ -20,9 +20,7 @@ export class AuthService {
   private baseUrl = 'http://49.13.20.148:3010/api';
 
   constructor(private _http: HttpClient, private _storage: StorageService) {
-    afterNextRender(() => {
-      this.getAuthenticationFromInit();
-    });
+    this.getAuthenticationFromInit();
   }
 
   get user(): User {

@@ -26,19 +26,25 @@
             ],
             "styles": [
               "src/styles.scss",
-              "node_modules/primeng/resources/themes/lara-dark-blue/theme.css",
               "node_modules/primeng/resources/primeng.min.css",
-              "node_modules/primeicons/primeicons.css"
+              "node_modules/primeicons/primeicons.css",
+              {
+                "input": "node_modules/primeng/resources/themes/lara-dark-blue/theme.css",
+                "bundleName": "theme-lara-dark-blue",
+                "inject": false
+              },
+              {
+                "input": "node_modules/primeng/resources/themes/lara-light-blue/theme.css",
+                "bundleName": "theme-lara-light-blue",
+                "inject": false
+              }
             ],
             "stylePreprocessorOptions": {
               "includePaths": ["src/styles"]
             },
             "scripts": [],
             "server": "src/main.server.ts",
-            "prerender": true,
-            "ssr": {
-              "entry": "server.ts"
-            }
+            "prerender": false
           },
           "configurations": {
             "production": {

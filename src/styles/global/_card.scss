@@ -1,9 +1,20 @@
 .card {
-  display: inline-block;
   background-color: var(--surface-a);
   border-radius: 8px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   padding: 1rem;
+  &-navegator {
+    color: var(--surface-400);
+    font-size: smaller;
+  }
+  &-header {
+    margin: 2rem 0;
+    &-title {
+      color: var(--primary-color);
+      font-weight: 700;
+      font-size: 2rem;
+    }
+  }
 }
 
 .card.w-full {

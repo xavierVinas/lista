@@ -3,14 +3,13 @@ import { Router } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { Subscription } from 'rxjs';
-import { HeaderComponent } from '../../../../core/layout/header/header.component';
 import { ListasService } from '../../../../core/services/listas.service';
 import { AuthService } from '../../../../core/services/auth.service';
 
 @Component({
   selector: 'app-listas',
   standalone: true,
-  imports: [FormsModule, CommonModule, HeaderComponent],
+  imports: [FormsModule, CommonModule],
   templateUrl: './listas.component.html',
   styleUrls: ['./listas.component.scss'],
 })

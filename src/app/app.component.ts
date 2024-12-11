@@ -1,18 +1,26 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { TableModule } from 'primeng/table';
 import { FormsModule } from '@angular/forms';
-import { HeaderComponent } from './core/layout/header/header.component';
+import { ThemeService } from './core/services/theme.service';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet, TableModule, FormsModule, HeaderComponent],
+  imports: [RouterOutlet, TableModule, FormsModule],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss',
 })
-export class AppComponent {
+export class AppComponent implements OnInit {
   title = 'lista-app';
+
+  constructor(private _theme: ThemeService) {}
+
+  ngOnInit(): void {
+    setTimeout(() => {
+      this._theme.intializeTheme();
+    }, 0);
+  }
 }
 
 /** @FIX

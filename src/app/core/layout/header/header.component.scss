@@ -13,5 +13,23 @@
 }
 
 .op__container {
-  width: 25vw;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  &__group {
+    display: flex;
+    flex-direction: column;
+    gap: 0.3rem;
+  }
+}
+
+::ng-deep {
+  .p-overlaypanel {
+    &:after {
+      display: none;
+    }
+    &:before {
+      display: none;
+    }
+  }
 }

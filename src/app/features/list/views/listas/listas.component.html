@@ -1,25 +1,32 @@
 <div class="container">
-  <div class="p-card">
-    <h2>Mis Listas</h2>
+  <div class="card" style="height: 85vh">
+    <!-- <div class="card-navegator">
+      <div>Volver a listas</div>
+    </div> -->
+    <div class="card-header">
+      <div class="card-header-title">Mis Listas</div>
+    </div>
 
-    <input
-      [(ngModel)]="nuevaListaNombre"
-      class="input-field"
-      placeholder="Nueva lista"
-    />
+    <div class="card-body">
+      <input
+        [(ngModel)]="nuevaListaNombre"
+        class="input-field"
+        placeholder="Nueva lista"
+      />
 
-    <button
-      class="primary-button"
-      [disabled]="!nuevaListaNombre?.trim()"
-      (click)="agregarLista()"
-    >
-      Añadir Lista
-    </button>
+      <button
+        class="primary-button"
+        [disabled]="!nuevaListaNombre?.trim()"
+        (click)="agregarLista()"
+      >
+        Añadir Lista
+      </button>
 
-    <ul class="items-list">
-      <li *ngFor="let lista of listas" (click)="verLista(lista.id)">
-        {{ lista.nombre }}
-      </li>
-    </ul>
+      <ul class="items-list">
+        <li *ngFor="let lista of listas" (click)="verLista(lista.id)">
+          {{ lista.nombre }}
+        </li>
+      </ul>
+    </div>
   </div>
 </div>
