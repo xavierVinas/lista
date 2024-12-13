@@ -11,15 +11,15 @@
       size="large"
       severity="secondary"
     />
-    <p-overlayPanel #op [appendTo]="options">
+    <p-popover #op [appendTo]="options">
       <div class="op__container">
         <div class="op__container__group">
           <label for="theme">Tema:</label>
-          <p-dropdown
+          <p-select
             [style]="{ width: '100%' }"
             id="theme"
-            [options]="(appThemes$ | async)!"
-            [ngModel]="(selectedTheme$ | async)!"
+            [options]="(appThemesMode$ | async)!"
+            [ngModel]="(selectedThemeMode$ | async)!"
             optionLabel="name"
             placeholder="Select a City"
             (onChange)="changeTheme($event.value)"
@@ -34,6 +34,6 @@
           ></p-button>
         </div>
       </div>
-    </p-overlayPanel>
+    </p-popover>
   </div>
 </header>

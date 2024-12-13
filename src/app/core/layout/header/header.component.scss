@@ -1,5 +1,5 @@
 .header {
-  background-color: var(--surface-a);
+  background-color: var(--p-surface-a);
   padding: 0.5rem 1rem;
   display: flex;
   justify-content: space-between;
@@ -34,7 +34,8 @@
 }
 
 ::ng-deep {
-  .p-overlaypanel {
+  .p-popover {
+    background: var(--p-surface-a);
     &:after {
       display: none;
     }

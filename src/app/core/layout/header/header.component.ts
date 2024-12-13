@@ -5,12 +5,13 @@ import { Router } from '@angular/router';
 import { User } from '../../models/user/user.models';
 import { ButtonModule } from 'primeng/button';
 import { OverlayPanelModule } from 'primeng/overlaypanel';
-import { DropdownModule } from 'primeng/dropdown';
 import { FormsModule } from '@angular/forms';
 import { ThemeService } from '../../services/theme.service';
 import { Observable, tap } from 'rxjs';
-import { Theme } from '../../models/theme/theme.model';
+import { ThemeMode } from '../../models/theme/theme.model';
 import { FloatLabelModule } from 'primeng/floatlabel';
+import { Select } from 'primeng/select';
+import { Popover } from 'primeng/popover';
 
 @Component({
   selector: 'app-header',
@@ -22,15 +23,16 @@ import { FloatLabelModule } from 'primeng/floatlabel';
     FormsModule,
     OverlayPanelModule,
     ButtonModule,
-    DropdownModule,
     FloatLabelModule,
+    Select,
+    Popover,
   ],
 })
 export class HeaderComponent implements OnInit {
   public selectedTheme: string = 'light';
   public user!: User;
-  public appThemes$!: Observable<Theme[]>;
-  public selectedTheme$!: Observable<Theme>;
+  public appThemesMode$!: Observable<ThemeMode[]>;
+  public selectedThemeMode$!: Observable<ThemeMode>;
   constructor(
     private _auth: AuthService,
     private _router: Router,
@@ -38,13 +40,13 @@ export class HeaderComponent implements OnInit {
   ) {}
 
   public ngOnInit(): void {
-    this.appThemes$ = this._theme.appThemes;
-    this.selectedTheme$ = this._theme.selectedTheme$;
+    this.appThemesMode$ = this._theme.appThemeMode;
+    this.selectedThemeMode$ = this._theme.selectedThemeMode$;
     this.getUser();
   }
 
-  public changeTheme(theme: Theme): void {
-    this._theme.changeTheme(theme);
+  public changeTheme(mode: ThemeMode): void {
+    this._theme.changeThemeMode(mode);
   }
 
   public getUser(): void {

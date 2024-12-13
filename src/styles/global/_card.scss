@@ -1,16 +1,16 @@
 .card {
-  background-color: var(--surface-a);
+  background-color: var(--p-surface-a);
   border-radius: 8px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   padding: 1rem;
   &-navegator {
-    color: var(--surface-400);
+    color: var(--p-surface-400);
     font-size: smaller;
   }
   &-header {
     margin: 2rem 0;
     &-title {
-      color: var(--primary-color);
+      color: var(--p-primary-color);
       font-weight: 700;
       font-size: 2rem;
     }

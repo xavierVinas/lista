@@ -3,8 +3,8 @@
   flex-direction: column;
   max-width: 25rem;
   padding: 0.5rem 1rem;
-  background-color: var(--surface-c);
-  border-radius: var(--border-radius);
+  background-color: var(--p-surface-c);
+  border-radius: var(--p-border-radius-lg);
   gap: 0.8rem;
   &__header {
     display: flex;

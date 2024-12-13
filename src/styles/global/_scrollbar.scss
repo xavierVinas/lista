@@ -9,19 +9,19 @@
 /* Track */
 
 ::-webkit-scrollbar-track {
-  box-shadow: inset 0 0 2px var(--surface-d, transparent);
+  box-shadow: inset 0 0 2px var(--p-surface-d, transparent);
 
-  background: var(--surface-b);
+  background: var(--p-surface-b);
 }
 
 ::-webkit-scrollbar-corner {
-  background: var(--surface-b);
+  background: var(--p-surface-b);
 }
 
 /* Handle */
 
 ::-webkit-scrollbar-thumb {
-  background: #597bbd;
+  background: var(--p-primary-color);
 
   border-radius: 10px;
 
