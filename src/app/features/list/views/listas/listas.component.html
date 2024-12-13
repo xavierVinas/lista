@@ -21,11 +21,9 @@
       >
         Añadir Lista
       </button> -->
-      @for(list of lists; track list){
+      @for(list of (lists$ | async); track list){
       <app-list-card [name]="list.name"></app-list-card>
       }
     </div>
   </div>
 </div>
-
-<div class="p-card">CARD</div>

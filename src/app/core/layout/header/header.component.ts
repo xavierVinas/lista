@@ -3,8 +3,7 @@ import { CommonModule } from '@angular/common';
 import { AuthService } from '../../services/auth.service';
 import { Router } from '@angular/router';
 import { User } from '../../models/user/user.models';
-import { ButtonModule } from 'primeng/button';
-import { OverlayPanelModule } from 'primeng/overlaypanel';
+import { Button } from 'primeng/button';
 import { FormsModule } from '@angular/forms';
 import { ThemeService } from '../../services/theme.service';
 import { Observable, tap } from 'rxjs';
@@ -21,8 +20,7 @@ import { Popover } from 'primeng/popover';
   imports: [
     CommonModule,
     FormsModule,
-    OverlayPanelModule,
-    ButtonModule,
+    Button,
     FloatLabelModule,
     Select,
     Popover,
