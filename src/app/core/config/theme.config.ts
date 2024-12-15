@@ -1,5 +1,5 @@
 import { definePreset } from '@primeng/themes';
-import Aura from '@primeng/themes/aura';
+import Lara from '@primeng/themes/lara';
 import { Theme, ThemeMode, ThemeType } from '../models/theme/theme.model';
 
 const defaultPalette = {
@@ -49,7 +49,7 @@ export const themes: Theme[] = [
     name: 'Claro',
     value: 'theme-light',
     type: ThemeType.LIGHT,
-    preset: definePreset(Aura, {
+    preset: definePreset(Lara, {
       semantic: defaultSemantic,
     }),
   },
