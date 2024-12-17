@@ -8,22 +8,14 @@
     </div>
 
     <div class="card-body">
-      <!-- <input
-        [(ngModel)]="nuevaListaNombre"
-        class="input-field"
-        placeholder="Nueva lista"
-      />
-
-      <button
-        class="primary-button"
-        [disabled]="!nuevaListaNombre?.trim()"
-        (click)="agregarLista()"
-      >
-        Añadir Lista
-      </button> -->
       @for(list of (lists$ | async); track list){
-      <app-list-card [name]="list.name"></app-list-card>
+      <app-list-card
+        (delete)="confirmDeleteList(list.id)"
+        [name]="list.name"
+      ></app-list-card>
       }
     </div>
   </div>
 </div>
+
+<p-confirmdialog key="confirm-delete-list" />

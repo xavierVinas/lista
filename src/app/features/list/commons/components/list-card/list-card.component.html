@@ -3,11 +3,13 @@
     <div class="header__title">{{ name() }}</div>
     <div class="header__options">
       <p-button
+        (click)="menu.toggle($event)"
         icon="pi pi-ellipsis-v"
         [rounded]="true"
         [text]="true"
         severity="secondary"
       />
+      <p-menu #menu [model]="items" [popup]="true" />
     </div>
   </div>
   <div class="list-card__footer">

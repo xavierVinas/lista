@@ -7,10 +7,8 @@ import {
   withFetch,
   withInterceptors,
 } from '@angular/common/http';
-import { provideAnimations } from '@angular/platform-browser/animations';
+import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 import { providePrimeNG } from 'primeng/config';
-import Aura from '@primeng/themes/aura';
-import { definePreset } from '@primeng/themes';
 import { getDefaultPreset } from './app/core/config/theme.config';
 import { authTokenInterceptor } from './app/core/interceptors/auth-token.interceptor';
 
@@ -25,9 +23,9 @@ bootstrapApplication(AppComponent, {
   providers: [
     provideRouter(routes),
     provideHttpClient(withFetch(), withInterceptors([authTokenInterceptor])),
-    provideAnimations(),
+    provideAnimationsAsync(),
     providePrimeNG({
-      ripple: false,
+      ripple: true,
       theme: {
         preset: getDefaultPreset(),
         options: {

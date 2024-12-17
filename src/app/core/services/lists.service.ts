@@ -14,4 +14,8 @@ export class ListsService {
   public getLists(): Observable<List[]> {
     return this._http.get<List[]>(`${this.baseUrl}/v1/lists`);
   }
+
+  public deleteLists(id: number): Observable<void> {
+    return this._http.delete<void>(`${this.baseUrl}/v1/lists/${id}`);
+  }
 }
