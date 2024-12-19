@@ -8,17 +8,27 @@ import { ListsService } from '../../../../core/services/lists.service';
 import { List } from '../../../../core/models/lists/lists.models';
 import { ConfirmDialog } from 'primeng/confirmdialog';
 import { ConfirmationService } from 'primeng/api';
+import { Dialog } from 'primeng/dialog';
+import { ButtonModule } from 'primeng/button';
 
 @Component({
   selector: 'app-listas',
   standalone: true,
-  imports: [FormsModule, CommonModule, ListCardComponent, ConfirmDialog],
+  imports: [
+    FormsModule,
+    CommonModule,
+    ListCardComponent,
+    ConfirmDialog,
+    Dialog,
+    ButtonModule,
+  ],
   providers: [ConfirmationService],
   templateUrl: './listas.component.html',
   styleUrls: ['./listas.component.scss'],
 })
 export class ListasComponent implements OnInit {
-  lists$!: Observable<List[]>;
+  public lists$!: Observable<List[]>;
+  public showCardDialog: boolean = false;
   constructor(
     private _lists: ListsService,
     private _confirmationService: ConfirmationService

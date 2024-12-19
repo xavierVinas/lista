@@ -15,6 +15,9 @@ export class ListsService {
     return this._http.get<List[]>(`${this.baseUrl}/v1/lists`);
   }
 
+  public updateList(id: number, name: string): Observable<void> {
+    return this._http.put<void>(`${this.baseUrl}/v1/lists`, { id, name });
+  }
   public deleteLists(id: number): Observable<void> {
     return this._http.delete<void>(`${this.baseUrl}/v1/lists/${id}`);
   }

@@ -4,7 +4,6 @@ import { ActivatedRoute } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { HeaderComponent } from '../../../../core/layout/header/header.component';
-import { ListasService } from '../../../../core/services/listas.service';
 
 @Component({
   selector: 'app-lista-detalle',
@@ -24,18 +23,14 @@ export class ListaDetalleComponent implements OnInit {
   nuevoItem: string = '';
   username: string = '';
 
-  constructor(
-    private route: ActivatedRoute,
-    private listasService: ListasService,
-    private router: Router
-  ) {}
+  constructor(private route: ActivatedRoute, private router: Router) {}
 
   ngOnInit() {
-    this.username = localStorage.getItem('username') ?? 'Usuario';
-    const id = Number(this.route.snapshot.paramMap.get('id'));
-    this.listasService.obtenerListas().subscribe((listas) => {
-      this.lista = listas.find((lista) => lista.id === id);
-    });
+    // this.username = localStorage.getItem('username') ?? 'Usuario';
+    // const id = Number(this.route.snapshot.paramMap.get('id'));
+    // this.listasService.obtenerListas().subscribe((listas) => {
+    //   this.lista = listas.find((lista) => lista.id === id);
+    // });
   }
 
   agregarItem() {

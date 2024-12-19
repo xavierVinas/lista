@@ -1,15 +1,12 @@
 import {
   Component,
   input,
-  Input,
   InputSignal,
   output,
   OutputEmitterRef,
-  Signal,
 } from '@angular/core';
 import { Button } from 'primeng/button';
 import { ProgressBarModule } from 'primeng/progressbar';
-import { SpeedDial } from 'primeng/speeddial';
 import { Menu } from 'primeng/menu';
 import { MenuItem } from 'primeng/api';
 
@@ -32,13 +29,12 @@ export class ListCardComponent {
         {
           label: 'Editar',
           icon: 'pi pi-pencil',
+          command: () => this.edit.emit(),
         },
         {
           label: 'Eliminar',
           icon: 'pi pi-trash',
-          command: () => {
-            this.delete.emit();
-          },
+          command: () => this.delete.emit(),
         },
       ],
     },

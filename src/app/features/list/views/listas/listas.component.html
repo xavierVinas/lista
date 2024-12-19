@@ -1,8 +1,5 @@
 <div class="container">
   <div class="card" style="height: 85vh">
-    <!-- <div class="card-navegator">
-      <div>Volver a listas</div>
-    </div> -->
     <div class="card-header">
       <div class="card-header-title">Mis Listas</div>
     </div>
@@ -11,11 +8,26 @@
       @for(list of (lists$ | async); track list){
       <app-list-card
         (delete)="confirmDeleteList(list.id)"
+        (edit)="showCardDialog = true"
         [name]="list.name"
       ></app-list-card>
       }
+      <p-button
+        severity="primary"
+        label="Añadir"
+        [fluid]="true"
+        icon="pi pi-plus"
+        (click)="showCardDialog = true"
+      ></p-button>
     </div>
   </div>
 </div>
 
 <p-confirmdialog key="confirm-delete-list" />
+
+<p-dialog
+  [modal]="true"
+  [(visible)]="showCardDialog"
+  [style]="{ width: '25rem' }"
+  (onHide)="showCardDialog = false"
+></p-dialog>
