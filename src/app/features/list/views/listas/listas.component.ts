@@ -1,8 +1,14 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import {
+  Component,
+  OnInit,
+  OnDestroy,
+  signal,
+  WritableSignal,
+} from '@angular/core';
 import { Router } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
-import { Observable, Subscription } from 'rxjs';
+import { Observable } from 'rxjs';
 import { ListCardComponent } from '../../commons/components/list-card/list-card.component';
 import { ListsService } from '../../../../core/services/lists.service';
 import { List } from '../../../../core/models/lists/lists.models';
@@ -10,6 +16,7 @@ import { ConfirmDialog } from 'primeng/confirmdialog';
 import { ConfirmationService } from 'primeng/api';
 import { Dialog } from 'primeng/dialog';
 import { ButtonModule } from 'primeng/button';
+import { CardConfigComponent } from '../../commons/components/card-config/card-config.component';
 
 @Component({
   selector: 'app-listas',
@@ -21,6 +28,7 @@ import { ButtonModule } from 'primeng/button';
     ConfirmDialog,
     Dialog,
     ButtonModule,
+    CardConfigComponent,
   ],
   providers: [ConfirmationService],
   templateUrl: './listas.component.html',
@@ -29,10 +37,15 @@ import { ButtonModule } from 'primeng/button';
 export class ListasComponent implements OnInit {
   public lists$!: Observable<List[]>;
   public showCardDialog: boolean = false;
+  public editingCard: WritableSignal<List | null> = signal<List | null>(null);
   constructor(
     private _lists: ListsService,
     private _confirmationService: ConfirmationService
   ) {}
+
+  get getHeaderTitle(): string {
+    return this.editingCard() ? 'Crear lista' : 'Editar lista';
+  }
 
   public ngOnInit(): void {
     this.getList();
@@ -59,6 +72,15 @@ export class ListasComponent implements OnInit {
         this.deleteList(id);
       },
     });
+  }
+
+  public saveCardConfig(list: Pick<List, 'id' | 'name'>): void {
+    this.showCardDialog = false;
+    this.editingCard.set(null);
+    const action$ = list.id
+      ? this._lists.updateList(list.id, list.name)
+      : this._lists.createList(list.name);
+    action$.subscribe(() => this.getList());
   }
 
   private deleteList(id: number): void {

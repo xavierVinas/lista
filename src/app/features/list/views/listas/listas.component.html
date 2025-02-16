@@ -8,7 +8,7 @@
       @for(list of (lists$ | async); track list){
       <app-list-card
         (delete)="confirmDeleteList(list.id)"
-        (edit)="showCardDialog = true"
+        (edit)="editingCard.set(list); showCardDialog = true"
         [name]="list.name"
       ></app-list-card>
       }
@@ -26,8 +26,13 @@
 <p-confirmdialog key="confirm-delete-list" />
 
 <p-dialog
+  [header]="getHeaderTitle"
   [modal]="true"
   [(visible)]="showCardDialog"
   [style]="{ width: '25rem' }"
-  (onHide)="showCardDialog = false"
+  (onHide)="editingCard.set(null); showCardDialog = false"
+  ><app-card-config
+    [list]="editingCard()"
+    (saveCard)="saveCardConfig($event)"
+  ></app-card-config
 ></p-dialog>

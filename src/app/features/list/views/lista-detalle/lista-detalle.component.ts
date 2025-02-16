@@ -3,12 +3,11 @@ import { Router } from '@angular/router';
 import { ActivatedRoute } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { HeaderComponent } from '../../../../core/layout/header/header.component';
 
 @Component({
   selector: 'app-lista-detalle',
   standalone: true,
-  imports: [CommonModule, FormsModule, HeaderComponent],
+  imports: [CommonModule, FormsModule],
   templateUrl: './lista-detalle.component.html',
   styleUrls: ['./lista-detalle.component.scss'],
 })

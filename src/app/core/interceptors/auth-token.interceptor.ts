@@ -10,12 +10,9 @@ export const authTokenInterceptor: HttpInterceptorFn = (
   req: HttpRequest<any>,
   next: HttpHandlerFn
 ) => {
-  console.log('0intercept');
   const token = JSON.parse(localStorage.getItem(SessionData.TOKEN)!);
 
   if (token) {
-    console.log('entro al if');
-
     const clonedRequest = req.clone({
       setHeaders: {
         Authorization: `${token}`,

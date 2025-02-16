@@ -1,0 +1,16 @@
+<div class="container">
+  <form [formGroup]="fb" (ngSubmit)="submitForm()">
+    <div class="form__group">
+      <label for="name">Nombre:</label>
+      <input id="name" type="text" formControlName="name" pInputText />
+    </div>
+    <div class="form__footer">
+      <button
+        pButton
+        severity="primary"
+        label="Guardar"
+        [disabled]="fb.invalid"
+      ></button>
+    </div>
+  </form>
+</div>

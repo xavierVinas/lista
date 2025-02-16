@@ -8,11 +8,15 @@ import { List } from '../models/lists/lists.models';
 })
 export class ListsService {
   private readonly baseUrl = 'http://49.13.20.148:3010/api';
-  //   private baseUrl = 'http://localhost:3010/api';
+  // private baseUrl = 'http://localhost:3010/api';
   constructor(private _http: HttpClient) {}
 
   public getLists(): Observable<List[]> {
     return this._http.get<List[]>(`${this.baseUrl}/v1/lists`);
+  }
+
+  public createList(name: string): Observable<void> {
+    return this._http.post<void>(`${this.baseUrl}/v1/lists`, { name });
   }
 
   public updateList(id: number, name: string): Observable<void> {

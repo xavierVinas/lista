@@ -5,7 +5,6 @@ import { catchError, map, tap } from 'rxjs/operators';
 import { User } from '../models/user/user.models';
 import { StorageService } from './storage.service';
 import { SessionData } from '../models/enums/storare.enum';
-import { Router } from '@angular/router';
 interface LoginResponse {
   user: User;
   authorizationToken: string;
@@ -46,8 +45,6 @@ export class AuthService {
   }
 
   public register(user: Partial<User>): Observable<any> {
-    console.log(this.baseUrl, user);
-
     return this._http.post(`${this.baseUrl}/v1/auth/register`, user).pipe(
       tap(() => {
         console.log('Registro exitoso');

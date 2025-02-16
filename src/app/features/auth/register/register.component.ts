@@ -22,7 +22,7 @@ export class RegisterComponent {
 
   constructor(
     private fb: FormBuilder,
-    private router: Router,
+    private _router: Router,
     private _auth: AuthService
   ) {
     this.registerForm = this.fb.group({
@@ -39,8 +39,6 @@ export class RegisterComponent {
   register() {
     const user = this.registerForm.value;
 
-    this._auth
-      .register(user)
-      .subscribe((data) => console.log(' 2 la respuesta del server =>', data)); //redireccionar al login
+    this._auth.register(user).subscribe((data) => this._router.navigate(['/'])); //redireccionar al login
   }
 }
